@@ -1,4 +1,4 @@
-name: Python CI (unittest)
+name: Python CI (pytest + unittest)
 
 on: [push]
 
@@ -6,19 +6,22 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4  # Загружает ваш код
+      - uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.x'  # или конкретная версия, например '3.10'
+          python-version: '3.x'
 
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
-          # Если есть requirements.txt:
-          pip install -r requirements.txt  
+          pip install pytest  # Для pytest-тестов
+          # Другие зависимости, если есть
 
-      - name: Run tests with unittest
+      - name: Run pytest tests
         run: |
-          python -m unittest discover -s tests  
+          python -m pytest tests_pytest/  # Путь к pytest-тестам
+
+      - name: Run unittest tests
+        run: |
+          python -m unittest discover -s tests_unittest/  # Путь к unittest-тестам 

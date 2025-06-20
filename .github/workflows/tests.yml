@@ -15,8 +15,13 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install pytest  
+          python -m pip install --upgrade pip
+          pip install pytest flake8
 
       - name: Run pytest tests
         run: |
-          python -m pytest W06/ W10/
+          python -m pytest W06/ W10/ --verbose
+
+      - name: Run flake8 linter
+        run: |
+          flake8 PYTRAIN/ --count --show-source --statistics

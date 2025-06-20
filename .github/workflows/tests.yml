@@ -16,7 +16,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pytest flake8
+          pip install pytest flake8 black
 
       - name: Run pytest tests
         run: |
@@ -24,4 +24,8 @@ jobs:
 
       - name: Run flake8 linter
         run: |
-          flake8 PYTRAIN/ --count --show-source --statistics
+          flake8 W01/ W02/ W03/ W04/ W05/ W06/ W07/ W08/ W09/ W10 --count --show-source --statistics
+
+      - name: Run black formatter
+        run: |
+          black --check W01/ W02/ W03/ W04/ W05/ W06/ W07/ W08/ W09/ W10 --verbose

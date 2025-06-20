@@ -1,4 +1,4 @@
-name: Python CI (pytest + unittest)
+name: Python CI (pytest)
 
 on: [push]
 

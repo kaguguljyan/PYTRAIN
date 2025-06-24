@@ -1,4 +1,4 @@
-name: Python CI (pytest + unittest)
+name: Python CI (pytest)
 
 on: [push]
 
@@ -15,12 +15,17 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install pytest  
+          python -m pip install --upgrade pip
+          pip install pytest flake8 black
 
       - name: Run pytest tests
         run: |
-          python -m pytest W06/ W10/
+          python -m pytest W06/ W10/ --verbose
 
-      - name: Run unittest tests
+      - name: Run flake8 linter
         run: |
-          python -m unittest discover -s W06/ W10/
+          flake8 W01/ W02/ W03/ W04/ W05/ W06/ W07/ W08/ W09/ W10 --count --show-source --statistics
+
+      - name: Run black formatter
+        run: |
+          black --check W01/ W02/ W03/ W04/ W05/ W06/ W07/ W08/ W09/ W10 --verbose

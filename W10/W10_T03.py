@@ -57,7 +57,7 @@ def show_users():  # показываем всех пользователей
 
 def update_user(user_id, name=None, age=None): # обновляем данные пользователя
     session = Session()
-    user = session.query(User).get(user_id) # находим пользователя по id
+    user = session.get(User, user_id) # находим пользователя по id
     if not user: # если пользователя с таким id нет
         print("Пользователя нет")
         session.close()
